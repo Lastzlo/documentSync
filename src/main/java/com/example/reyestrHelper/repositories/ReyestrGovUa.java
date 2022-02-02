@@ -1,8 +1,7 @@
-package com.example.govhalper.repositories;
+package com.example.reyestrHelper.repositories;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,4 +1,4 @@
-package com.example.govhalper;
+package com.example.reyestrHelper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

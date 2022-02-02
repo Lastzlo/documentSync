@@ -1,10 +1,11 @@
-package com.example.govhalper.repositories;
+package com.example.reyestrHelper.repositories;
 
-import com.example.govhalper.servises.HtmlBuffer;
+import com.example.reyestrHelper.servises.HtmlBuffer;
 import kong.unirest.HttpResponse;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ReyestrGovUaTest {
 

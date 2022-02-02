@@ -1,12 +1,7 @@
-package com.example.govhalper.servises;
+package com.example.reyestrHelper.servises;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 class HtmlBufferTest {
 
