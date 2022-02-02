@@ -1,7 +1,7 @@
 package com.example.govhalper.repositories;
 
 import com.example.govhalper.servises.HtmlBuffer;
-import org.junit.jupiter.api.Assertions;
+import kong.unirest.HttpResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ReyestrGovUaTest {
 
 	@Test
-	void getData() {
-		String data = new ReyestrGovUa().getData();
+	void getResponse() {
+		HttpResponse<String> response = new ReyestrGovUa().getResponse();
 
-		assertNotNull(data);
-//		HtmlBuffer.write(data);
+		assertTrue(response.isSuccess());
+		assertNotNull(response.getBody());
+
+		HtmlBuffer.write(response.getBody());
 	}
 }
