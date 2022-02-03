@@ -2,3 +2,7 @@ reyestrGovUa:
   url: "https://reyestr.court.gov.ua/"
   pagingInfo:
     itemsPerPage: "1000"
+googleSheets:
+  TOKENS_DIRECTORY_PATH: "tokens"
+  CREDENTIALS_FILE_PATH: "/credentials.json"
+  APPLICATION_NAME: "Google Sheets API Java Quickstart"
