@@ -12,28 +12,23 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.SheetsScopes;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
 public class GoogleCredentialsFactory {
 
-	private static final String TOKENS_DIRECTORY_PATH = "tokens";
-	private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+	private final String tokensDirectoryPath;
 
-	/**
-	 * Global instance of the scopes required by this quickstart.
-	 * If modifying these scopes, delete your previously saved tokens/ folder.
-	 */
-	private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
-	private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+	private final String credentialsFilePath;
 
+	public GoogleCredentialsFactory(String credentialsFilePath, String tokensDirectoryPath) {
+		this.credentialsFilePath = credentialsFilePath;
+		this.tokensDirectoryPath = tokensDirectoryPath;
+	}
 
-	public static Credential getCredentials() throws IOException, GeneralSecurityException {
+	public Credential getCredentials() throws IOException, GeneralSecurityException {
 		return getCredentials(GoogleNetHttpTransport.newTrustedTransport());
 	}
 
@@ -44,18 +39,26 @@ public class GoogleCredentialsFactory {
 	 * @return An authorized Credential object.
 	 * @throws IOException If the credentials.json file cannot be found.
 	 */
-	public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+	private Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+		final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+		/**
+		 * Global instance of the scopes required by this quickstart.
+		 * If modifying these scopes, delete your previously saved tokens/ folder.
+		 */
+		final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);
+
 		// Load client secrets.
-		InputStream in = SheetsQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+		File credentialsFile = new File(credentialsFilePath);
+		InputStream in = new FileInputStream(credentialsFile);
 		if (in == null) {
-			throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+			throw new FileNotFoundException("Resource not found: " + credentialsFilePath);
 		}
 		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
 		// Build flow and trigger user authorization request.
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
 				HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-				.setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+				.setDataStoreFactory(new FileDataStoreFactory(new java.io.File(tokensDirectoryPath)))
 				.setAccessType("offline")
 				.build();
 		LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
