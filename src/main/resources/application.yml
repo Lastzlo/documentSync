@@ -1,0 +1,4 @@
+reyestrGovUa:
+  url: "https://reyestr.court.gov.ua/"
+  pagingInfo:
+    itemsPerPage: "1000"
