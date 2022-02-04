@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GovHalperApplication {
+public class DocumentSyncApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GovHalperApplication.class, args);
+		SpringApplication.run(DocumentSyncApplication.class, args);
 	}
 
 }
