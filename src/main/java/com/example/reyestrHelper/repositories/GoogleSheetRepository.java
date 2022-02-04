@@ -37,7 +37,7 @@ public class GoogleSheetRepository {
 				.setValues(newValues);
 		try {
 			UpdateValuesResponse result = service.spreadsheets().values().update(documentKey, range, body)
-					.setValueInputOption("USER_ENTERED")
+					.setValueInputOption("RAW")
 					.execute();
 			log.info("documents was updated in the Google Sheet");
 		} catch (IOException e) {
